@@ -1,0 +1,66 @@
+---
+title: "eqvis Vignette"
+author: "Kim Aquilino"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{eqvis Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `eqvis` package provides functions for cleaning and plotting NOAA significant earthquake dataset using either a timeline or map. The earthquake data must be cleaned first using the `eq_clean_data` function. With this function, the country and colon are removed from the `LOCATION_NAME` and it is converted to title case. A new `DATE` column is derived from the date parts (`YEAR`, `MONTH`, `DAY`). `LATITUDE` and `LONGITUDE` are converted to numeric.
+  
+The NOAA earthquake dataset can be accessed from: https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt. This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. This package was developed to work with years AC only.  
+
+## Timeline Info
+
+A timeline can be produced using `ggplot2` with the `geom_timeline`/`stat_timeline` functions. It will plot a timeline with points for each earthquake and can optionally include a size and color/fill aesthectics. If `xmin` and `xmax` aesthetics are provided, `stat_timeline` will subset the data. The `geom_timeline_label` function can be used to add a label geom. It print the label aesthetic for the top `n_max` earthquakes in terms of magnitude.
+
+This example demonstrates the use of `eq_clean_data`, `geom_timeline`, and `geom_timeline_label`. 
+
+```{r timeline, fig.width=7}
+library(ggplot2)
+library(scales)
+library(eqvis)
+ggplot(data=subset(eq_clean_data(sample_eq), !is.na(EQ_PRIMARY) & COUNTRY %in% c("USA")), 
+       aes(x = DATE,
+           y = COUNTRY,
+           size = EQ_PRIMARY,
+           xmin = as.Date('2012-01-01',"%Y-%m-%d"), 
+           xmax = as.Date('2016-12-31',"%Y-%m-%d"),
+           color = DEATHS, 
+           fill = DEATHS,
+           label = LOCATION_NAME)) +
+    geom_timeline(alpha = .5) +
+    scale_size_continuous(name = "Richter Scale Value") +
+    scale_color_continuous(name = "# Deaths") +
+    scale_fill_continuous(guide=FALSE) +
+    labs(x = "DATE", y = "") +
+    geom_timeline_label(aes(n_max = 3)) +
+    theme(legend.position = "bottom",
+          legend.key = element_blank(),
+          legend.box = "horizontal",
+          panel.background = element_blank(), 
+          axis.line.x = element_line(size = 1, color = "black"), 
+          axis.ticks.x = element_line(size = 1)) 
+```
+
+## Map Info
+
+A map can be produced using eq_map(). It will display circle markers at the lat/lon locations with a radius based on the magnitude of the earthquake and popup text reflecting the annotation column provided. An optional eq_create_label function is provided that generate label text using the location name, magnitude and deaths for the earthquake.
+
+This example demonstrates the use of `eq_clean_data`, `eq_create_label`, and `eq_map`.
+
+```{r map, out.width='100%'}
+library(eqvis)
+library(leaflet)
+library(magrittr)
+library(dplyr)
+library(lubridate)
+sample_eq %>% 
+eq_clean_data() %>% 
+dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>% 
+dplyr::mutate(popup_text = eq_create_label(.)) %>% 
+eq_map(annot_col = "popup_text")
+```

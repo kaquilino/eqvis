@@ -1,0 +1,24 @@
+Package: eqvis
+Type: Package
+Title: Visualize Significant Earthquake Data
+Version: 1.0
+Date: 2017-07-01
+Imports:
+    ggplot2,
+    magrittr,
+    leaflet,
+    scales,
+    lubridate,
+    dplyr
+LazyData: true
+Author: Kim Aquilino <kim.aquilino@gmail.com>
+Maintainer: Kim Aquilino <kim.aquilino@gmail.com>
+Description: Visualize significant earthquake data from the NOAA on a timeline
+    or map.
+License: CC0
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1
