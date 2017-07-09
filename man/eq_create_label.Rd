@@ -22,4 +22,3 @@ If \code{LOCATION_NAME}, \code{EQ_PRIMARY} or \code{DEATHS} are \code{NA}, they 
 \dontrun{eq_create_label(sample_eq)}
 
 }
-

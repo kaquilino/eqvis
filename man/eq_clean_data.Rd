@@ -30,4 +30,3 @@ This package was developed to work with years AC only.
 \dontrun{eq_clean_data(sample_eq)}
 
 }
-

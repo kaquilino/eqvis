@@ -28,4 +28,3 @@ A dataset containing a subset of the NOAA significant earthquakes.
 }
 }
 \keyword{datasets}
-

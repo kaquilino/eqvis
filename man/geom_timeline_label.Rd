@@ -60,4 +60,3 @@ theme(legend.position = "bottom",
 }
 
 }
-
