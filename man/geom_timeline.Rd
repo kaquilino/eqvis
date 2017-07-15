@@ -2,47 +2,73 @@
 % Please edit documentation in R/geom_timeline.R
 \name{geom_timeline}
 \alias{geom_timeline}
-\title{Timeline, for NOAA Earthquake Dataset}
+\title{Timeline plot, for NOAA Earthquake Dataset}
 \usage{
 geom_timeline(mapping = NULL, data = NULL, stat = "timeline",
   position = "identity", na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, ...)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{aes} or \code{aes_} If specified and 
-inherit.aes = TRUE (the default), it is combined with the default mapping at the top level of 
-the plot. You must supply mapping if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
+\code{\link{aes_}}. If specified and \code{inherit.aes = TRUE} (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{The data to be displayed in this layer. There are three options:
-If NULL, the default, the data is inherited from the plot data as specified in the call to ggplot.
-A data.frame, or other object, will override the plot data. All objects will be fortified to produce a data frame. See fortify for which variables will be created
-A function will be called with a single argument, the plot data. The return value must be a data.frame., and will be used as the layer data.}
+\item{data}{The data to be displayed in this layer. There are three
+   options:
 
-\item{stat}{The statistical transformation to use on the data for this layer, as a string.}
+   If \code{NULL}, the default, the data is inherited from the plot
+   data as specified in the call to \code{\link{ggplot}}.
 
-\item{position}{Position adjustment, either as a string, or the result of a call to a position adjustment function.}
+   A \code{data.frame}, or other object, will override the plot
+   data. All objects will be fortified to produce a data frame. See
+   \code{\link{fortify}} for which variables will be created.
 
-\item{na.rm}{If FALSE (the default), removes missing values with a warning. If TRUE silently removes missing values.}
+   A \code{function} will be called with a single argument,
+   the plot data. The return value must be a \code{data.frame.}, and
+   will be used as the layer data.}
 
-\item{show.legend}{logical. Should this layer be included in the legends? NA, the default, includes if any aesthetics are mapped. FALSE never includes, and TRUE always includes.}
+\item{stat}{Use to override the default connection between
+`geom_timeline` and `stat_timeline`.}
 
-\item{inherit.aes}{If FALSE, overrides the default aesthetics, rather than combining with them. This is most useful for helper functions that define both data and aesthetics and shouldn't inherit behaviour from the default plot specification, e.g. borders.}
+\item{position}{Position adjustment, either as a string, or the result of
+a call to a position adjustment function.}
 
-\item{...}{other arguments passed on to layer. These are often aesthetics, used to set an aesthetic to a fixed value, like color = "red" or size = 3. They may also be parameters to the paired geom/stat.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped.
+\code{FALSE} never includes, and \code{TRUE} always includes.}
+
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. \code{\link{borders}}.}
+
+\item{...}{other arguments passed on to \code{\link{layer}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{color = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
 }
 \description{
-The timeline geom is used to create a timeline of earthquake data.
+The timeline displays the significant earthquakes from the NOAA dataset along a timeline.
 }
 \details{
 The timeline is created over the time period of the dataset with points for each earthquake.
-If the default stat_timeline is used as the stat, xmin and xmax aesthetics subset the data.
+If the default stat_timeline is used as the stat, the stat xmin and xmax aesthetics subset the data.
 }
 \note{
 The NOAA earthquake dataset can be accessed at: 
-\url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}.
+\href{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1}{NOAA Significant Earthquake Database}.
 This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. 
 This package was developed to work with years AC only.
 }
+\section{Aesthetics}{
+
+\Sexpr[results=rd,stage=build]{eqvis:::rd_aesthetics("GeomTimeline","geom_timeline")}
+}
+
 \examples{
 \dontrun{
 ggplot(data=subset(eq_clean_data(sample_eq), !is.na(EQ_PRIMARY) & COUNTRY \%in\% c("USA","MEXICO")), 

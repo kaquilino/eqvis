@@ -1,9 +1,3 @@
-#' Geom Proto
-#' @rdname ggplot2-ggproto
-#' @format NULL
-#' @usage NULL
-#' @keywords internal
-#' @export
 StatTimeline <- ggplot2::ggproto("StatTimeline", ggplot2::Stat,
                                  required_aes = c("x"),
                                  default_aes = ggplot2::aes(xmin = NULL, xmax = NULL, n_max = NULL),
@@ -19,30 +13,18 @@ StatTimeline <- ggplot2::ggproto("StatTimeline", ggplot2::Stat,
 
 #' Timeline Statistic, for NOAA Earthquake Dataset
 #'
-#' The timeline stat is used to subset the earthquake data for the specified data range and max n points based on
+#' The timeline stat is used to subset the earthquake data for the specified data range 
+#' (aesthetics \code{xmin} and \code{xmax}) and max n points (aesthetic \code{n_max}) based on
 #' the size (magnitude) aesthetic.
 #' 
-#' @param mapping Set of aesthetic mappings created by \code{aes} or \code{aes_} If specified and 
-#' inherit.aes = TRUE (the default), it is combined with the default mapping at the top level of 
-#' the plot. You must supply mapping if there is no plot mapping.
-#' 
-#' @param data The data to be displayed in this layer. There are three options:
-#' If NULL, the default, the data is inherited from the plot data as specified in the call to ggplot.
-#' A data.frame, or other object, will override the plot data. All objects will be fortified to produce a data frame. See fortify for which variables will be created
-#' A function will be called with a single argument, the plot data. The return value must be a data.frame., and will be used as the layer data.
-#' 
-#' @param geom The geometric object to use to display the data.
-#' 
-#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
-#' 
-#' @param ... other arguments passed on to layer. These are often aesthetics, used to set an aesthetic to a fixed value, like color = "red" or size = 3. They may also be parameters to the paired geom/stat.
-#' 
-#' @param na.rm If FALSE (the default), removes missing values with a warning. If TRUE silently removes missing values.
-#' 
-#' @param show.legend logical. Should this layer be included in the legends? NA, the default, includes if any aesthetics are mapped. FALSE never includes, and TRUE always includes.
-#' 
-#' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them. This is most useful for helper functions that define both data and aesthetics and shouldn't inherit behaviour from the default plot specification, e.g. borders.
+#' @inheritParams ggplot2::geom_point
 #'
+#' @param geom Use to override the default connection between
+#'   `geom_timeline` and `stat_timeline`.
+#' 
+#' @section Aesthetics:
+#' \Sexpr[results=rd,stage=build]{eqvis:::rd_aesthetics("StatTimeline","stat_timeline")}
+#' 
 #' @examples
 #' \dontrun{
 #' ggplot(data=subset(eq_clean_data(sample_eq), !is.na(EQ_PRIMARY) & COUNTRY %in% c("USA","MEXICO")), 
@@ -69,13 +51,6 @@ stat_timeline <- function(mapping = NULL, data = NULL, geom = "timeline",
    )
 }
 
-#' Geom Proto
-#' @rdname timeline-ggproto
-#' @format NULL
-#' @usage NULL
-#' @keywords internal
-#' @import scales
-#' @export
 GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
                         required_aes = c("x"),
                         default_aes = ggplot2::aes(shape=21, y=0, alpha = 1, colour = "black", fill = "black", size = 1.5, stroke = .5),
@@ -101,38 +76,25 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
                         }
 )
 
-#' Timeline, for NOAA Earthquake Dataset
+#' Timeline plot, for NOAA Earthquake Dataset
 #'
-#' The timeline geom is used to create a timeline of earthquake data.
-#' 
-#' @param mapping Set of aesthetic mappings created by \code{aes} or \code{aes_} If specified and 
-#' inherit.aes = TRUE (the default), it is combined with the default mapping at the top level of 
-#' the plot. You must supply mapping if there is no plot mapping.
-#' 
-#' @param data The data to be displayed in this layer. There are three options:
-#' If NULL, the default, the data is inherited from the plot data as specified in the call to ggplot.
-#' A data.frame, or other object, will override the plot data. All objects will be fortified to produce a data frame. See fortify for which variables will be created
-#' A function will be called with a single argument, the plot data. The return value must be a data.frame., and will be used as the layer data.
-#' 
-#' @param stat The statistical transformation to use on the data for this layer, as a string.
-#' 
-#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
-#' 
-#' @param ... other arguments passed on to layer. These are often aesthetics, used to set an aesthetic to a fixed value, like color = "red" or size = 3. They may also be parameters to the paired geom/stat.
-#' 
-#' @param na.rm If FALSE (the default), removes missing values with a warning. If TRUE silently removes missing values.
-#' 
-#' @param show.legend logical. Should this layer be included in the legends? NA, the default, includes if any aesthetics are mapped. FALSE never includes, and TRUE always includes.
-#' 
-#' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them. This is most useful for helper functions that define both data and aesthetics and shouldn't inherit behaviour from the default plot specification, e.g. borders.
+#' The timeline displays the significant earthquakes from the NOAA dataset along a timeline.
 #'
 #' @details The timeline is created over the time period of the dataset with points for each earthquake.
-#' If the default stat_timeline is used as the stat, xmin and xmax aesthetics subset the data.
+#' If the default stat_timeline is used as the stat, the stat xmin and xmax aesthetics subset the data.
+#'
+#' @inheritParams ggplot2::geom_point
+#' 
+#' @param stat Use to override the default connection between
+#'   `geom_timeline` and `stat_timeline`.
 #' 
 #' @note The NOAA earthquake dataset can be accessed at: 
-#' \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}.
+#' \href{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1}{NOAA Significant Earthquake Database}.
 #' This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. 
 #' This package was developed to work with years AC only.  
+#' 
+#' @section Aesthetics:
+#' \Sexpr[results=rd,stage=build]{eqvis:::rd_aesthetics("GeomTimeline","geom_timeline")}
 #' 
 #' @examples
 #' \dontrun{
@@ -165,13 +127,13 @@ geom_timeline <- function(mapping = NULL, data = NULL, stat = "timeline",
    )
 }
 
-#' Geom Proto
-#' @rdname timeline-ggproto
-#' @format NULL
-#' @usage NULL
-#' @keywords internal
-#' @import scales
-#' @export
+# Geom Proto
+# @rdname timeline-ggproto
+# @format NULL
+# @usage NULL
+# @keywords internal
+# @import scales
+# @export
 GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
                              required_aes = c("x","label"),
                              default_aes = ggplot2::aes(y = 0),
@@ -198,7 +160,7 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #' If the default stat_timeline is used as the stat, N_max aesthetics will subset the labels to the top n based on magnitude.
 #' 
 #' @note The NOAA earthquake dataset can be accessed at: 
-#' \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}.
+#' \href{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1}{NOAA Significant Earthquake Database}.
 #' This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. 
 #' This package was developed to work with years AC only.  
 #' 

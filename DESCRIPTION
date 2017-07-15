@@ -11,8 +11,8 @@ Imports:
     lubridate,
     dplyr
 LazyData: true
-Author: Kim Aquilino <kim.aquilino@gmail.com>
-Maintainer: Kim Aquilino <kim.aquilino@gmail.com>
+Authors@R: person("Kim", "Aquilino", role = c("aut", "cre"),
+                     email = "kim.aquilino@gmail.com")
 Description: Visualize significant earthquake data from the NOAA on a timeline
     or map.
 License: CC0

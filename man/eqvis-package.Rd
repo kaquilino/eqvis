@@ -28,3 +28,7 @@ The data can be retrieved with the following:
 
 \code{eq <- read.delim(file_url)}
 }
+\author{
+\strong{Maintainer}: Kim Aquilino \email{kim.aquilino@gmail.com}
+
+}

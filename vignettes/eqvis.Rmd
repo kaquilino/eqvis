@@ -52,7 +52,7 @@ A map can be produced using eq_map(). It will display circle markers at the lat/
 
 This example demonstrates the use of `eq_clean_data`, `eq_create_label`, and `eq_map`.
 
-```{r map, out.width='100%'}
+```{r map, out.width='100%', message=FALSE}
 library(eqvis)
 library(leaflet)
 library(magrittr)
