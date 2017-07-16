@@ -3,6 +3,8 @@ output: github_document
 always_allow_html: yes
 ---
 
+[![Travis-CI Build Status](https://travis-ci.org/kaquilino/eqvis.svg?branch=master)](https://travis-ci.org/kaquilino/eqvis)
+
 The `eqvis` package provides functions for cleaning and plotting NOAA significant earthquake dataset using either a timeline or map. The earthquake data must be cleaned first using the `eq_clean_data` function. With this function, the country and colon are removed from the `LOCATION_NAME` and it is converted to title case. A new `DATE` column is derived from the date parts (`YEAR`, `MONTH`, `DAY`). `LATITUDE` and `LONGITUDE` are converted to numeric.
   
 The NOAA earthquake dataset can be accessed from: https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt. This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. This package was developed to work with years AC only.  
