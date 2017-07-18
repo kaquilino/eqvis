@@ -1,7 +1,14 @@
+## ----clean_data----------------------------------------------------------
+library(eqvis)
+sample3 <- head(sample_eq[,c("YEAR","MONTH","DAY","LOCATION_NAME","LATITUDE","LONGITUDE")],3)
+print.data.frame(sample3,row.names=FALSE)
+print.data.frame(eq_clean_data(sample3),row.names=FALSE)
+
 ## ----timeline, fig.width=7-----------------------------------------------
 library(ggplot2)
 library(scales)
 library(eqvis)
+
 ggplot(data=subset(eq_clean_data(sample_eq), !is.na(EQ_PRIMARY) & COUNTRY %in% c("USA")), 
        aes(x = DATE,
            y = COUNTRY,
@@ -30,9 +37,13 @@ library(leaflet)
 library(magrittr)
 library(dplyr)
 library(lubridate)
+
 sample_eq %>% 
 eq_clean_data() %>% 
 dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>% 
 dplyr::mutate(popup_text = eq_create_label(.)) %>% 
 eq_map(annot_col = "popup_text")
+
+## ----sample_eq-----------------------------------------------------------
+str(sample_eq)
 

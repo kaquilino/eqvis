@@ -18,13 +18,14 @@ and \code{LONGITUDE} are converted to numeric.
 This function cleans an NOAA earthquake significant earthquake \code{data.frame}.
 }
 \details{
-If \code{MONTH} or \code{DAY} are missing, 1 is used (January or 1st of month, respectively).
+If \code{MONTH} or \code{DAY} are missing, 1 is used (January or 1st of month, respectively). The data.frame 
+must include `YEAR`, `MONTH`, `DAY`, `LATITUDE`, and `LONGITUDE` columns.
 }
 \note{
 The NOAA earthquake dataset can be accessed at: 
 \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}.
 This dataset contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. 
-This package was developed to work with years AC only.
+This package was developed to work with positive years (A.D.) only.
 }
 \examples{
 \dontrun{eq_clean_data(sample_eq)}
