@@ -1,4 +1,5 @@
 ## copied from ggplot2
+## for auto-generating aesthetics section of documentation
 aesthetics <- function (x) {
    req_aes <- x$required_aes
    def_aes <- names(x$default_aes)

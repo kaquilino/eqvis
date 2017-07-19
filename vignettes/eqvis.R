@@ -44,6 +44,6 @@ dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>%
 dplyr::mutate(popup_text = eq_create_label(.)) %>% 
 eq_map(annot_col = "popup_text")
 
-## ----sample_eq-----------------------------------------------------------
+## ----sample_eq, echo=FALSE-----------------------------------------------
 str(sample_eq)
 

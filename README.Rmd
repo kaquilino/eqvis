@@ -16,3 +16,7 @@ A timeline can be produced using `ggplot2` with the `geom_timeline`/`stat_timeli
 ## Map Info
 
 A map can be produced using eq_map(). It will display circle markers at the lat/lon locations with a radius based on the magnitude of the earthquake and popup text reflecting the annotation column provided. An optional eq_create_label function is provided that generate label text using the location name, magnitude and deaths for the earthquake.
+
+## Sample Dataset
+
+A `sample_eq` dataset is provided. It is a subset of the complete NOAA dataset, filtered for `COUNTRY` values `USA` and `MEXICO` and `YEAR` 2000-2017.

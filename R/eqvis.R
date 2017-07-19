@@ -101,7 +101,8 @@ eq_map <- function(data, annot_col = 'DATE') {
 
 #' Sample NOAA Significant Earthquake Data
 #'
-#' A dataset containing a subset of the NOAA significant earthquakes. 
+#' A dataset containing a subset of the NOAA significant earthquakes. Filtered for `COUNTRY` values 
+#' `USA` and `MEXICO`, `YEAR` values 2000-2017 and columns used for demonstration of this package's functions. 
 #' 
 #' \itemize{
 #'   \item YEAR. 
@@ -115,7 +116,7 @@ eq_map <- function(data, annot_col = 'DATE') {
 #'   \item EQ_PRIMARY. Magnitude of earthquake. 
 #' }
 #'
-#' @source \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}
+#' @source The complete dataset can be retrieved at \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}
 "sample_eq"
 #> [1] "sample_eq"
 

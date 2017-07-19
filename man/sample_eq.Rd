@@ -6,13 +6,14 @@
 \title{Sample NOAA Significant Earthquake Data}
 \format{An object of class \code{data.frame} with 63 rows and 9 columns.}
 \source{
-\url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}
+The complete dataset can be retrieved at \url{https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt}
 }
 \usage{
 sample_eq
 }
 \description{
-A dataset containing a subset of the NOAA significant earthquakes.
+A dataset containing a subset of the NOAA significant earthquakes. Filtered for `COUNTRY` values 
+`USA` and `MEXICO`, `YEAR` values 2000-2017 and columns used for demonstration of this package's functions.
 }
 \details{
 \itemize{

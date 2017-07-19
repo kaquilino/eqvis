@@ -9,13 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The `eqvis` package provides functions for cleaning and plotting NOAA significant earthquake dataset using either a timeline or map. A sample of the NOAA data `sample_eq` is provided. 
+The `eqvis` package provides functions for cleaning and plotting the NOAA significant earthquake dataset using either a timeline or map. A sample of the NOAA data `sample_eq` is provided. 
 
 ## Clean Data
 
-The earthquake data must be cleaned to utilize the timeline and map functions using the `eq_clean_data` function. With this function, the country and colon are removed from the `LOCATION_NAME` and it is converted to title case. A new `DATE` column is derived from the date parts (`YEAR`, `MONTH`, `DAY`). `LATITUDE` and `LONGITUDE` are converted to numeric.
+The earthquake data must be cleaned to utilize the timeline and map functions by using the `eq_clean_data` function. With this function, the country and colon are removed from the `LOCATION_NAME` and it is converted to title case. This provides for a better label. A `DATE` column is created from the date parts (`YEAR`, `MONTH`, `DAY`). The `LATITUDE` and `LONGITUDE` columns are converted to numerics.
 
-This example demonstrates the use of `eq_clean_data`. 
+This example demonstrates the use of `eq_clean_data` showing the before and after values. Notice the difference in values for the location name and the added `DATE`.  
 
 ```{r clean_data}
 library(eqvis)
@@ -60,7 +60,7 @@ ggplot(data=subset(eq_clean_data(sample_eq), !is.na(EQ_PRIMARY) & COUNTRY %in% c
 
 ## Map Info
 
-A map can be produced using eq_map(). It will display circle markers at the lat/lon locations with a radius based on the magnitude of the earthquake and popup text reflecting the annotation column provided. An optional eq_create_label function is provided that will generate label text using the location name, magnitude and deaths for the earthquake.
+A map can be produced using eq_map(). It will display circle markers at the lat/lon locations with a radius based on the magnitude of the earthquake and popup text reflecting the annotation column provided. An optional eq_create_label function is provided that will generate label text `popup_text` using the location name, magnitude and deaths for the earthquake.
 
 This example demonstrates the use of `eq_clean_data`, `eq_create_label`, and `eq_map`.
 
@@ -80,13 +80,13 @@ eq_map(annot_col = "popup_text")
 
 ## Data
 
-A `sample_eq` dataset is provided. It has the following structure:
+A `sample_eq` dataset is provided. It is a subset of the complete NOAA dataset, filtered for `COUNTRY` values `USA` and `MEXICO` and `YEAR` 2000-2017.  It has the following structure:
 
-```{r sample_eq}
+```{r sample_eq, echo=FALSE}
 str(sample_eq)
 ```
 
 The complete NOAA earthquake dataset can be accessed from:
 https://www.ngdc.noaa.gov/nndc/struts/results?type_0=Exact&query_0=$ID&t=101650&s=13&d=189&dfn=signif.txt. It contains information about 5,933 earthquakes around the world over an approximately 4,000 year time span. 
 
-Note: This package was developed to work with years AC only.  
+Note: This package was developed to work with positive years (A.D.) only.  
